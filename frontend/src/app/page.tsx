@@ -1,4 +1,8 @@
+"use client"
+
 import { CallToAction } from "@/sections/CallToAction";
+import { FeatureDiscovery } from "@/sections/FeatureDiscovery";
+import { FinancialSituation } from "@/sections/FinancialSituation";
 import { Footer } from "@/sections/Footer";
 import { Header } from "@/sections/Header";
 import { Header2 } from "@/sections/Header2";
@@ -8,18 +12,68 @@ import { LogoTicker } from "@/sections/LogoTicker";
 import { Pricing } from "@/sections/Pricing";
 import { ProductShowcase } from "@/sections/ProductShowcase";
 import { Testimonials } from "@/sections/Testimonials";
+import { useState } from "react";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { auth } from "../firebase"; // Firebase auth setup
+import { LogoTicker2 } from "@/sections/LogoTicker2";
+
+const db = getFirestore()
 
 export default function Home() {
+  const [selectedStage, setSelectedStage] = useState("")
+  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([])
+
+  const saveUserData = async (
+    userID: string,
+    email: string,
+    displayName: string
+  ) => {
+    if (!userID) return
+
+    try {
+      // Store the selected stage and features in Firestore
+      const userRef = doc(db, "users", userID)
+      await setDoc(userRef, {
+        selectedStage,
+        selectedFeatures,
+        userID,
+        email,
+        displayName
+      })
+      console.log("User data saved successfully!")
+    } catch (error) {
+      console.error("Error saving user data: ", error)
+    }
+  }
+
+  const onFinancialSituationSuccess = (stage: string) => {
+    setSelectedStage(stage)
+  }
+
+  const onFeatureDiscoverySuccess = (features: string[]) => {
+    setSelectedFeatures(features)
+  }
+
+  const handleSignInSuccess = (
+    userID: string,
+    email: string,
+    displayName: string
+  ) => {
+    saveUserData(userID, email, displayName)
+  }
   return (
     <>
       <Header2 />
       <Hero2 />
       {/* <Hero /> */}
       {/* <LogoTicker /> */}
-      <ProductShowcase />
-      <Pricing />
-      <Testimonials />
-      <CallToAction />
+      <LogoTicker2 />
+      {/* <ProductShowcase /> */}
+      <FinancialSituation onFinancialSituationSuccess={onFinancialSituationSuccess} />
+      <FeatureDiscovery onFeatureDiscoverySuccess={onFeatureDiscoverySuccess}/>
+      {/* <Pricing />
+      <Testimonials /> */}
+      <CallToAction onCallToActionSuccess={handleSignInSuccess} />
       <Footer />
     </>
   )

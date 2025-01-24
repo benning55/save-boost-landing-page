@@ -36,7 +36,7 @@ export const Hero2 = () => {
   })
   const translateY = useTransform(scrollYProgress, [0, 1], [150, -150])
   const scrollToNextSection = () => {
-    const nextSection = document.querySelector("#submitForm")
+    const nextSection = document.querySelector("#financialSituation")
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: "smooth" })
     }
@@ -44,7 +44,7 @@ export const Hero2 = () => {
   return (
     <section
       ref={heroRef}
-      className='pt-8 pb-20 md:pt-5 md:pb-20 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#3B82F6,#EFF6FF_100%)] overflow-x-clip'
+      className='pt-8 pb-20 md:pt-5 md:pb-20 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#7AAEF5,#EFF6FF_100%)] overflow-x-clip'
     >
       <div className='container'>
         <motion.div
@@ -53,7 +53,7 @@ export const Hero2 = () => {
           animate='visible' // Trigger the animation immediately on load
           variants={sectionVariants}
         >
-          <div className='md:w-[478px]'>
+          <div className='md:w-[600px]'>
             <motion.h1
               className='text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text mt-6'
               variants={itemVariants}
@@ -78,7 +78,7 @@ export const Hero2 = () => {
                 <Rocket className='h-6 w-6 text-blue-600 inline-block mr-2' />
                 <span>
                   <strong>Rainy Day Fund:</strong> Save for unexpected events
-                  with a target of 3 months' expenses.
+                  with a target of 3 months expenses.
                 </span>
               </motion.li>
               <motion.li
@@ -88,7 +88,7 @@ export const Hero2 = () => {
                 <ShieldCheck className='h-6 w-6 text-blue-600 inline-block mr-2' />
                 <span>
                   <strong>Stock Fund:</strong> Invest up to $500 in what you
-                  love. Build a portfolio you're proud of!
+                  love. Build a portfolio you are proud of!
                 </span>
               </motion.li>
               <motion.li
@@ -98,16 +98,18 @@ export const Hero2 = () => {
                 <Target className='h-6 w-6 text-blue-600 inline-block mr-2' />
                 <span>
                   <strong>Future Fund:</strong> Dreaming of a car, travel, or a
-                  new home? Let's make it happen!
+                  new home? Let make it happen!
                 </span>
               </motion.li>
             </motion.ul>
             <div className='flex gap-1 items-center mt-[30px]'>
-              <button className='btn btn-primary' onClick={scrollToNextSection}>Get for free</button>
-              <button className='btn btn-text gap-1'>
+              <button className='btn btn-primary' onClick={scrollToNextSection}>
+                Sign Up Today
+              </button>
+              {/* <button className='btn btn-text gap-1'>
                 <span>Learn more</span>
                 <ArrowIcon className='h-5 w-5' />
-              </button>
+              </button> */}
             </div>
           </div>
           <div className='mt-20 md:mt-0 md:h-[648px] md:flex-1 relative'>

@@ -4,29 +4,51 @@ import starImage from "@/assets/star.png"
 import springImage from "@/assets/spring.png"
 import Image from "next/image"
 import {motion, useScroll, useTransform} from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState } from "react"
+import SignUpButton from "@/components/SignUpButton"
 
-export const CallToAction = () => {
+
+interface CallToActionProps {
+  onCallToActionSuccess: (
+    userID: string,
+    email: string,
+    displayName: string
+  ) => void
+}
+
+export const CallToAction: React.FC<CallToActionProps> = ({
+  onCallToActionSuccess,
+}) => {
+  const [userId, setUserId] = useState<string | null>(null)
   const sectionRef = useRef(null)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end center"],
   })
 
+  const handleSignInSuccess = (
+    userID: string,
+    email: string,
+    displayName: string
+  ) => {
+    setUserId(userId) // Save userId in parent component
+    console.log("User ID received from child:", userId)
+    onCallToActionSuccess(userID, email, displayName)
+  }
+
   const translateY = useTransform(scrollYProgress, [0, 1], [150, -150])
   return (
     <section
-      id="submitForm"
+      id='submitForm'
       ref={sectionRef}
-      className='bg-gradient-to-b from-white to-[#D2DCFF] py-24 overflow-x-clip'
+      className='bg-gradient-to-b from-white to-[#7AAEF5] py-24 overflow-x-clip'
     >
       <div className='container'>
         <div className='section-heading relative'>
           <h2 className='section-title'>Sign up for free today</h2>
           <p className='section-description mt-5'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
-            molestiae nulla aperiam debitis itaque, quibusdam atque. Molestiae
-            enim neque temporibus deserunt veniam ullam!
+            Please join us and be the first to hear about our progress! Lets
+            build it together and we are open to your brilliant ideas.
           </p>
           <motion.img
             src={starImage.src}
@@ -47,14 +69,15 @@ export const CallToAction = () => {
             }}
           />
           <div className='flex gap-2 mt-10 justify-center'>
-            <button className='btn btn-primary'>Get for free</button>
-            <button className='btn btn-txt gap-1'>
+            {/* <button className='btn btn-primary'>Sign up with google</button> */}
+            <SignUpButton onSignInSuccess={handleSignInSuccess} />
+            {/* <button className='btn btn-txt gap-1'>
               <span>Learn More</span>
               <ArrowRight className='h-5 w-5' />
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
     </section>
   )
-};
+}

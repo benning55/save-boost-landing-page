@@ -10,16 +10,16 @@ export const Header2 = () => {
         <div className='container'>
           <div className='flex items-center justify-between'>
             <Image src={Logo} alt='Sass Logo' height={40} width={40} />
-            <MenuIcon className='h-5 w-5 md:hidden' />
-            <nav className='hidden md:flex gap-6 text-black/60 items-center'>
-              <a href='#'>About</a>
+            {/* <MenuIcon className='h-5 w-5 md:hidden' /> */}
+            <nav className='flex gap-6 text-black/60 items-center'>
+              {/* <a href='#'>About</a>
               <a href='#'>Features</a>
               <a href='#'>Customer</a>
               <a href='#'>Updates</a>
-              <a href='#'>Help</a>
-              <button className='bg-black text-white px-4 py-2 rounded-lg font-medium inline-flex items-center justify-center tracking-tight'>
+              <a href='#'>Help</a> */}
+              {/* <button className='bg-black text-white px-4 py-2 rounded-lg font-medium inline-flex items-center justify-center tracking-tight'>
                 Get for free
-              </button>
+              </button> */}
             </nav>
           </div>
         </div>

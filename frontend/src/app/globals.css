@@ -38,4 +38,20 @@
   .card {
     @apply p-10 border border-[#222222]/10 rounded-3xl shadow-[0_7px_14px_#EAEAEA] max-w-xs w-full
   }
+
+  .logo-ticker-icon {
+    font-size: 5rem; /* Adjust size of the icons */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transitions */
+  }
+
+  .logo-ticker-icon:hover {
+    transform: scale(1.2); /* Slightly enlarge the icon when hovered */
+    opacity: 0.8; /* Add some opacity change for a hover effect */
+  }
+
+  @media (max-width: 768px) {
+    .logo-ticker-icon {
+      font-size: 2rem; /* Reduce size on smaller screens */
+    }
+  }
 }
