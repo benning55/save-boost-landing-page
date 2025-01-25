@@ -47,8 +47,7 @@ export const CallToAction: React.FC<CallToActionProps> = ({
         <div className='section-heading relative'>
           <h2 className='section-title'>Sign up for free today</h2>
           <p className='section-description mt-5'>
-            Please join us and be the first to hear about our progress! Lets
-            build it together and we are open to your brilliant ideas.
+            Please join us and be the first to hear about our progress!
           </p>
           <motion.img
             src={starImage.src}

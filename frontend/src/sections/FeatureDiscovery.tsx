@@ -1,19 +1,20 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
 import { useEffect, useState } from "react"
 import { twMerge } from "tailwind-merge"
 import { motion } from "framer-motion"
 
 const financialFeatures = [
-  "We directly deposit a Cashback reward to your Stock Saving account. you’ve earned for every purchase",
-  "AI dynamically adjusts savings amounts based on real-time cash flow. Automatically allocates funds into Rainy Budget, Stock Investment, and Future Fund.",
+  "Cashback for everyday purchases goes directly into your Stock Fund.",
+  "AI optimally allocates excess cash into Rainy, Stock, and Future Fund.",
   "AI analyzes transaction history and identifies spending patterns.",
-  "Helps to uncover unnecessary subscription fees.",
-  "AI automates bill payments including interest payments on existing loans or credit card balance.",
+  "Regularly review and cancel unnecessary subscriptions (e.g., streaming services, magazines).",
+  "AI automates bill payments.",
+  "AI optimally automates loan or credit card debt repayments.",
   "Provides real-time nudges to prevent impulsive spending.",
-  "AI creates a personalized Debt Payoff plan using Avalanche or Snowball methods.",
-  "Dynamically adjusts debt repayment amounts based on cash flow availability.",
-  "Suggests ways to lower interest rates, including balance transfers or refinancing options.",
-  "Helps users pay off debt faster without sacrificing essential expenses.",
+  "Smart suggestion to lower interest payments on Debts.",
+  "Provide the Cheapest Gas station in real-time near you.",
+  "Search grocery items, and find stores with the best sales in real-time near you.",
 ]
 
 const cardVariants = {
@@ -23,9 +24,8 @@ const cardVariants = {
 }
 
 interface FeatureDiscoveryProps {
-  onFeatureDiscoverySuccess: (selectedFeatures: string[]) => void // Define prop type for callback
+  onFeatureDiscoverySuccess: (selectedFeatures: string[]) => void
 }
-
 
 export const FeatureDiscovery: React.FC<FeatureDiscoveryProps> = ({
   onFeatureDiscoverySuccess,
@@ -33,15 +33,13 @@ export const FeatureDiscovery: React.FC<FeatureDiscoveryProps> = ({
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([])
 
   const handleSelectFeature = (feature: string) => {
-    if (selectedFeatures.includes(feature)) {
-      // If the feature is already selected, deselect it
-      setSelectedFeatures(selectedFeatures.filter((f) => f !== feature))
-    } else {
-      // If less than 3 features are selected, allow selection
-      if (selectedFeatures.length < 3) {
-        setSelectedFeatures([...selectedFeatures, feature])
-      }
-    }
+    setSelectedFeatures((prevFeatures) =>
+      prevFeatures.includes(feature)
+        ? prevFeatures.filter((f) => f !== feature)
+        : prevFeatures.length < 3
+        ? [...prevFeatures, feature]
+        : prevFeatures
+    )
   }
 
   const scrollToNextSection = () => {
@@ -52,23 +50,20 @@ export const FeatureDiscovery: React.FC<FeatureDiscoveryProps> = ({
   }
 
   useEffect(() => {
-    if (selectedFeatures.length == 3) {
+    if (selectedFeatures.length === 3) {
       onFeatureDiscoverySuccess(selectedFeatures)
       scrollToNextSection()
     }
-  }, [selectedFeatures])
+  }, [selectedFeatures, onFeatureDiscoverySuccess])
 
   return (
     <section id='featureDiscovery' className='py-24 bg-white'>
       <div className='container mx-auto px-4'>
         <div className='section-heading text-center mb-12'>
           <h2 className='section-title text-4xl font-extrabold leading-tight'>
-            Discover Features Tailored for You
+            Let's Boost Your Savings! Choose 3 features that are most attractive
+            to you.
           </h2>
-          <p className='section-description mt-4 text-xl leading-relaxed'>
-            Explore how we can enhance your financial health. Select the 3
-            features that resonate with you the most.
-          </p>
         </div>
         <div className='grid grid-cols-1 gap-8 mt-10 lg:grid-cols-3'>
           {financialFeatures.map((feature, index) => (
@@ -87,7 +82,7 @@ export const FeatureDiscovery: React.FC<FeatureDiscoveryProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{
                   scale: 0.9,
-                  rotate: 10, // Fun spin effect on tap
+                  rotate: 10,
                   transition: { type: "spring", stiffness: 500, damping: 10 },
                 }}
                 animate={{
@@ -100,14 +95,10 @@ export const FeatureDiscovery: React.FC<FeatureDiscoveryProps> = ({
                 className={twMerge(
                   "btn btn-secondary px-5 py-3 rounded-full shadow-lg focus:ring-2 focus:ring-blue-300",
                   selectedFeatures.includes(feature)
-                    ? "bg-blue-400 text-white cursor-not-allowed opacity-60"
+                    ? "bg-green-500 text-white"
                     : "bg-blue-600 text-white hover:bg-blue-700"
                 )}
                 onClick={() => handleSelectFeature(feature)}
-                disabled={
-                  selectedFeatures.includes(feature) &&
-                  selectedFeatures.length >= 3
-                }
               >
                 {selectedFeatures.includes(feature) ? "Selected" : "Select"}
               </motion.button>

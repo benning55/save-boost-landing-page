@@ -1,152 +1,135 @@
-/* eslint-disable react/no-unescaped-entities */
 "use client"
-import ArrowIcon from "@/assets/arrow-right.svg"
-import cogImage from "@/assets/cog.png"
-import cylinderImage from "@/assets/cylinder.png"
-import noodleImage from "@/assets/noodle.png"
-import financialGrowth from "@/assets/growth.png"
 import { Rocket, ShieldCheck, Target } from "lucide-react"
-import Image from "next/image"
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValueEvent,
-} from "framer-motion"
-import { useRef } from "react"
+import { motion } from "framer-motion"
+import financialGrowth from "@/assets/growth.png"
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
+const heroVariants = {
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, when: "beforeChildren", staggerChildren: 0.3 },
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    },
   },
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  hidden: {
+    opacity: 0,
+    y: 40,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      type: "spring",
+      stiffness: 80,
+    },
+  },
 }
 
 export const Hero2 = () => {
-  const heroRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start end", "end start"],
-  })
-  const translateY = useTransform(scrollYProgress, [0, 1], [150, -150])
   const scrollToNextSection = () => {
     const nextSection = document.querySelector("#financialSituation")
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: "smooth" })
     }
   }
+
   return (
-    <section
-      ref={heroRef}
-      className='pt-8 pb-20 md:pt-5 md:pb-20 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#7832FE,#EFF6FF_100%)] overflow-x-clip'
-    >
+    <section className='pt-8 pb-20 md:pt-5 md:pb-20 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#7832FE,#EFF6FF_100%)] overflow-x-clip'>
       <div className='container'>
         <motion.div
-          className='md:flex items-center'
-          initial='hidden' // This ensures immediate visibility
-          animate='visible' // Trigger the animation immediately on load
-          variants={sectionVariants}
+          initial='hidden'
+          animate='visible'
+          variants={heroVariants}
+          className='md:flex items-center gap-12'
         >
-          <div className='md:w-[600px]'>
+          <div className='md:w-[600px] space-y-6'>
             <motion.h1
-              className='text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text mt-6'
               variants={itemVariants}
+              className='text-5xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text'
             >
               SaveBoost: AI-Powered Savings to Build Your Wealth
             </motion.h1>
+
             <motion.p
-              className='text-lg text-[#010D3E] tracking-tight mt-6'
               variants={itemVariants}
+              className='text-xl text-[#010D3E] opacity-80'
             >
-              Your savings account is divided into 3 buckets!
+              Your savings account is divided into 3 strategic buckets!
             </motion.p>
-            <motion.ul
-              className='list-disc list-inside text-lg text-[#010D3E] mt-4 space-y-2'
-              variants={itemVariants}
-            >
-              <motion.li
-                variants={itemVariants}
-                className='flex items-center space-x-2'
-              >
-                <Rocket className='h-6 w-6 text-blue-600 inline-block mr-2' />
-                <span>
-                  <strong>Rainy Day Fund:</strong> Cover unexpected events. Car
-                  breakdown? We've got you covered for repair costs!
-                </span>
-              </motion.li>
-              <motion.li
-                variants={itemVariants}
-                className='flex items-center space-x-2'
-              >
-                <ShieldCheck className='h-6 w-6 text-blue-600 inline-block mr-2' />
-                <span>
-                  <strong>Stock Fund:</strong> Choose the Company you Love. Save
-                  to Buy it!
-                </span>
-              </motion.li>
-              <motion.li
-                variants={itemVariants}
-                className='flex items-center space-x-2'
-              >
-                <Target className='h-6 w-6 text-blue-600 inline-block mr-2' />
-                <span>
-                  <strong>Future Fund:</strong>Dreaming of a car, travel, or a
-                  new home? Let's make it happen! Signup
-                </span>
-              </motion.li>
+
+            <motion.ul variants={itemVariants} className='space-y-4'>
+              {[
+                {
+                  icon: Rocket,
+                  title: "Rainy Day Fund",
+                  description:
+                    "Cover unexpected events. Car breakdown? We've got you covered for repair costs!",
+                },
+                {
+                  icon: ShieldCheck,
+                  title: "Stock Fund",
+                  description: "Choose the Company you Love. Save to Buy it!",
+                },
+                {
+                  icon: Target,
+                  title: "Future Fund",
+                  description:
+                    "Dreaming of a car, travel, or a new home? Let's make it happen!",
+                },
+              ].map((bucket, index) => (
+                <motion.li
+                  key={index}
+                  variants={itemVariants}
+                  className='flex items-start space-x-4 p-4 bg-white/50 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all'
+                >
+                  <bucket.icon className='h-8 w-8 text-blue-600 flex-shrink-0 mt-1' />
+                  <div>
+                    <h3 className='font-bold text-lg text-[#010D3E]'>
+                      {bucket.title}
+                    </h3>
+                    <p className='text-[#010D3E]/70'>{bucket.description}</p>
+                  </div>
+                </motion.li>
+              ))}
             </motion.ul>
-            <div className='flex gap-1 items-center mt-[30px]'>
-              <button className='btn btn-primary' onClick={scrollToNextSection}>
+
+            <motion.div variants={itemVariants} className='flex space-x-4 mt-6'>
+              <button
+                onClick={scrollToNextSection}
+                className='px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors font-semibold shadow-md hover:shadow-lg'
+              >
                 Explore Boost
               </button>
-              {/* <button className='btn btn-text gap-1'>
-                <span>Learn more</span>
-                <ArrowIcon className='h-5 w-5' />
-              </button> */}
-            </div>
+            </motion.div>
           </div>
-          <div className='mt-20 md:mt-0 md:h-[648px] md:flex-1 relative'>
+
+          <motion.div
+            variants={itemVariants}
+            className='mt-12 md:mt-0 flex-1 relative'
+          >
             <motion.img
               src={financialGrowth.src}
-              alt='cog image'
-              className='md:absolute md:h-full md:w-auto md:max-w-none md:-left-6 lg:-left-0'
+              alt='Financial Growth Visualization'
+              className='w-full h-auto rounded-2xl shadow-2xl'
               animate={{
-                translateY: [-30, 30],
+                translateY: [-20, 20],
+                rotate: [0, 2, -2, 0],
               }}
               transition={{
                 repeat: Infinity,
                 repeatType: "mirror",
-                duration: 3,
+                duration: 4,
                 ease: "easeInOut",
               }}
             />
-            {/* <motion.img
-              src={cylinderImage.src}
-              width={220}
-              height={220}
-              alt='Cylinder Image'
-              className='hidden md:block -top-8 -left-32 md:absolute'
-              style={{
-                translateY: translateY,
-              }}
-            /> */}
-            {/* <motion.img
-              src={noodleImage.src}
-              width={220}
-              className='hidden lg:block absolute top-[524px] left-[448px] rotate-[30deg]'
-              alt='Noodle Image'
-              style={{
-                translateY: translateY,
-              }}
-            /> */}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

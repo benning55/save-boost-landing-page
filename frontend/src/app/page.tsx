@@ -8,7 +8,7 @@ import { Header } from "@/sections/Header";
 import { Header2 } from "@/sections/Header2";
 import { Hero } from "@/sections/Hero";
 import { Hero2 } from "@/sections/Hero2";
-import {} from "@/components/SavingAllocator"
+import {Demo} from "@/sections/Demo"
 import { LogoTicker } from "@/sections/LogoTicker";
 import { Pricing } from "@/sections/Pricing";
 import { ProductShowcase } from "@/sections/ProductShowcase";
@@ -25,13 +25,14 @@ export default function Home() {
   const [selectedStage, setSelectedStage] = useState("")
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([])
 
-  const sendEmail = async (displayName: string) => {
+  const sendEmail = async (toEmail: string, displayName: string) => {
     try {
       await emailjs.send(
         "service_55wqo59",
         "template_51wfb0j",
         {
           to_name: displayName,
+          to_email: toEmail,
         },
         "7_pe9rOfPWz4mUYIP"
       )
@@ -59,7 +60,7 @@ export default function Home() {
         displayName
       })
       console.log("User data saved successfully!")
-      sendEmail(displayName)
+      sendEmail(email, displayName)
     } catch (error) {
       console.error("Error saving user data: ", error)
     }
@@ -88,7 +89,7 @@ export default function Home() {
       {/* <LogoTicker /> */}
       <LogoTicker2 />
       {/* <ProductShowcase /> */}
-      <FinancialSituation onFinancialSituationSuccess={onFinancialSituationSuccess} />
+      {/* <FinancialSituation onFinancialSituationSuccess={onFinancialSituationSuccess} /> */}
       <FeatureDiscovery onFeatureDiscoverySuccess={onFeatureDiscoverySuccess}/>
       <Demo />
       {/* <Pricing />
