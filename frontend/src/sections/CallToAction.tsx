@@ -41,7 +41,7 @@ export const CallToAction: React.FC<CallToActionProps> = ({
     <section
       id='submitForm'
       ref={sectionRef}
-      className='bg-gradient-to-b from-white to-[#7AAEF5] py-24 overflow-x-clip'
+      className='bg-gradient-to-b from-white to-[#7832FE] py-24 overflow-x-clip'
     >
       <div className='container'>
         <div className='section-heading relative'>

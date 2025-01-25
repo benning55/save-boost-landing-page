@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
 import ArrowIcon from "@/assets/arrow-right.svg"
 import cogImage from "@/assets/cog.png"
@@ -44,7 +45,7 @@ export const Hero2 = () => {
   return (
     <section
       ref={heroRef}
-      className='pt-8 pb-20 md:pt-5 md:pb-20 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#7AAEF5,#EFF6FF_100%)] overflow-x-clip'
+      className='pt-8 pb-20 md:pt-5 md:pb-20 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#7832FE,#EFF6FF_100%)] overflow-x-clip'
     >
       <div className='container'>
         <motion.div
@@ -58,14 +59,13 @@ export const Hero2 = () => {
               className='text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text mt-6'
               variants={itemVariants}
             >
-              SaveBoost: AI-Powered Savings to Build Your Financial Health
+              SaveBoost: AI-Powered Savings to Build Your Wealth
             </motion.h1>
             <motion.p
               className='text-lg text-[#010D3E] tracking-tight mt-6'
               variants={itemVariants}
             >
-              Your savings account is divided into 3 smart funds, designed to
-              help you reach your goals effortlessly:
+              Your savings account is divided into 3 buckets!
             </motion.p>
             <motion.ul
               className='list-disc list-inside text-lg text-[#010D3E] mt-4 space-y-2'
@@ -77,8 +77,8 @@ export const Hero2 = () => {
               >
                 <Rocket className='h-6 w-6 text-blue-600 inline-block mr-2' />
                 <span>
-                  <strong>Rainy Day Fund:</strong> Save for unexpected events
-                  with a target of 3 months expenses.
+                  <strong>Rainy Day Fund:</strong> Cover unexpected events. Car
+                  breakdown? We've got you covered for repair costs!
                 </span>
               </motion.li>
               <motion.li
@@ -87,8 +87,8 @@ export const Hero2 = () => {
               >
                 <ShieldCheck className='h-6 w-6 text-blue-600 inline-block mr-2' />
                 <span>
-                  <strong>Stock Fund:</strong> Invest up to $500 in what you
-                  love. Build a portfolio you are proud of!
+                  <strong>Stock Fund:</strong> Choose the Company you Love. Save
+                  to Buy it!
                 </span>
               </motion.li>
               <motion.li
@@ -97,14 +97,14 @@ export const Hero2 = () => {
               >
                 <Target className='h-6 w-6 text-blue-600 inline-block mr-2' />
                 <span>
-                  <strong>Future Fund:</strong> Dreaming of a car, travel, or a
-                  new home? Let make it happen!
+                  <strong>Future Fund:</strong>Dreaming of a car, travel, or a
+                  new home? Let's make it happen! Signup
                 </span>
               </motion.li>
             </motion.ul>
             <div className='flex gap-1 items-center mt-[30px]'>
               <button className='btn btn-primary' onClick={scrollToNextSection}>
-                Sign Up Today
+                Explore Boost
               </button>
               {/* <button className='btn btn-text gap-1'>
                 <span>Learn more</span>

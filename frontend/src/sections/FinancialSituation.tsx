@@ -61,7 +61,7 @@ export const FinancialSituation: React.FC<FinancialSituationProps> = ({
   return (
     <section
       id='financialSituation'
-      className='bg-gradient-to-b from-[#FFFFFF] to-[#7AAEF5] py-24 bg-white'
+      className='bg-gradient-to-b from-[#FFFFFF] to-[#7832FE] py-24 bg-white'
     >
       <div className='container mx-auto px-4'>
         <div className='section-heading text-center mb-12'>
@@ -97,17 +97,17 @@ export const FinancialSituation: React.FC<FinancialSituationProps> = ({
                 animate={{
                   scale: selectedStage === title ? 1.05 : 1,
                   backgroundColor:
-                    selectedStage === title ? "#4CAF50" : "#007BFF",
+                    selectedStage === title ? "#4CAF50" : "#7832FE",
                   transition: { duration: 0.2 },
                 }}
                 className={twMerge(
-                  "btn btn-primary bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg focus:ring-2 focus:ring-blue-300",
+                  "btn btn-primary text-white px-6 py-3 rounded-full shadow-lg focus:ring-2 ",
                   selectedStage === title && "cursor-not-allowed opacity-60"
                 )}
                 onClick={() => handleSelectStage(title)}
                 disabled={selectedStage === title}
               >
-                {selectedStage === title ? "Selected" : "Select"}
+                {selectedStage === title ? "Selected" : "Selection"}
               </motion.button>
             </motion.div>
           ))}
