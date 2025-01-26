@@ -34,7 +34,7 @@ const itemVariants = {
 
 export const Hero2 = () => {
   const scrollToNextSection = () => {
-    const nextSection = document.querySelector("#financialSituation")
+    const nextSection = document.querySelector("#featureDiscovery")
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: "smooth" })
     }
@@ -103,7 +103,8 @@ export const Hero2 = () => {
             <motion.div variants={itemVariants} className='flex space-x-4 mt-6'>
               <button
                 onClick={scrollToNextSection}
-                className='px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors font-semibold shadow-md hover:shadow-lg'
+                className='px-6 py-3 text-white rounded-full hover:bg-blue-700 transition-colors font-semibold shadow-md hover:shadow-lg'
+                style={{ background: "#00030f" }}
               >
                 Explore Boost
               </button>

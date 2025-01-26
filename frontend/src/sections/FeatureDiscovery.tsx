@@ -61,7 +61,7 @@ export const FeatureDiscovery: React.FC<FeatureDiscoveryProps> = ({
       <div className='container mx-auto px-4'>
         <div className='section-heading text-center mb-12'>
           <h2 className='section-title text-4xl font-extrabold leading-tight'>
-            Let's Boost Your Savings! Choose 3 features that are most attractive
+            Choose 3 features that are most attractive
             to you.
           </h2>
         </div>

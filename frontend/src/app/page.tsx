@@ -13,7 +13,7 @@ import { LogoTicker } from "@/sections/LogoTicker";
 import { Pricing } from "@/sections/Pricing";
 import { ProductShowcase } from "@/sections/ProductShowcase";
 import { Testimonials } from "@/sections/Testimonials";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { auth } from "../firebase"; // Firebase auth setup
 import { LogoTicker2 } from "@/sections/LogoTicker2";
@@ -24,6 +24,9 @@ const db = getFirestore()
 export default function Home() {
   const [selectedStage, setSelectedStage] = useState("")
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([])
+  const [errorMessage, setErrorMessage] = useState("")
+
+  useEffect(() => {}, [selectedFeatures])
 
   const sendEmail = async (toEmail: string, displayName: string) => {
     try {
@@ -81,6 +84,12 @@ export default function Home() {
   ) => {
     saveUserData(userID, email, displayName)
   }
+
+  const handleSignInFailed = (message: string) => {
+    console.log("*********")
+    console.log(message)
+    setErrorMessage(message)
+  }
   return (
     <>
       <Header2 />
@@ -90,11 +99,12 @@ export default function Home() {
       <LogoTicker2 />
       {/* <ProductShowcase /> */}
       {/* <FinancialSituation onFinancialSituationSuccess={onFinancialSituationSuccess} /> */}
+      {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
       <FeatureDiscovery onFeatureDiscoverySuccess={onFeatureDiscoverySuccess}/>
       <Demo />
       {/* <Pricing />
       <Testimonials /> */}
-      <CallToAction onCallToActionSuccess={handleSignInSuccess} />
+      <CallToAction onCallToActionSuccess={handleSignInSuccess} features={selectedFeatures} onSignInFailed={handleSignInFailed}/>
       <Footer />
     </>
   )

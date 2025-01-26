@@ -4,17 +4,27 @@ import { signInWithPopup } from "firebase/auth"
 import { doc, setDoc, getFirestore } from "firebase/firestore"
 import { motion } from "framer-motion" // Import framer-motion for animations
 import Google from "@/assets/google.svg"
+import { features } from "process"
 
 const db = getFirestore()
 
 interface SignUpButtonProps {
-  onSignInSuccess: (userID: string, email: string, displayName: string) => void // Define prop type for callback
+  onSignInSuccess: (userID: string, email: string, displayName: string) => void // Define prop type for callback,
+  onSignInFailed: (message: string) => void,
+  features: string[]
 }
 
-const SignUpButton: React.FC<SignUpButtonProps> = ({ onSignInSuccess }) => {
+const SignUpButton: React.FC<SignUpButtonProps> = ({
+  onSignInSuccess,
+  onSignInFailed, features,
+}) => {
   const [user, setUser] = useState<any>(null)
 
   const handleSignUp = async () => {
+    if (features.length >= 3) {
+      onSignInFailed("Please select the interested feature first")
+      return
+    }
     try {
       const result = await signInWithPopup(auth, provider)
       const user = result.user
@@ -60,7 +70,10 @@ const SignUpButton: React.FC<SignUpButtonProps> = ({ onSignInSuccess }) => {
             transition: { type: "spring", stiffness: 400, damping: 10 },
           }}
         >
-          Sign up with Google <span style={{paddingLeft: "0.25rem"}}><Google /></span>
+          Sign up with Google{" "}
+          <span style={{ paddingLeft: "0.25rem" }}>
+            <Google />
+          </span>
         </motion.button>
       ) : (
         <motion.div

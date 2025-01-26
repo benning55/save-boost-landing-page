@@ -14,10 +14,14 @@ interface CallToActionProps {
     email: string,
     displayName: string
   ) => void
+  onSignInFailed: (message: string) => void,
+  features: string[]
 }
 
 export const CallToAction: React.FC<CallToActionProps> = ({
   onCallToActionSuccess,
+  onSignInFailed,
+  features
 }) => {
   const [userId, setUserId] = useState<string | null>(null)
   const sectionRef = useRef(null)
@@ -69,7 +73,7 @@ export const CallToAction: React.FC<CallToActionProps> = ({
           />
           <div className='flex gap-2 mt-10 justify-center'>
             {/* <button className='btn btn-primary'>Sign up with google</button> */}
-            <SignUpButton onSignInSuccess={handleSignInSuccess} />
+            <SignUpButton onSignInSuccess={handleSignInSuccess} features={features} onSignInFailed={onSignInFailed}/>
             {/* <button className='btn btn-txt gap-1'>
               <span>Learn More</span>
               <ArrowRight className='h-5 w-5' />
